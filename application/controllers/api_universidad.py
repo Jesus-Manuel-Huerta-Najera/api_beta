@@ -22,6 +22,18 @@ class Action:
                             result.append(row)
                             text ['Alumno'] = result
                     return json.dumps(text)
+                elif data['action'] == "search":
+                    with open ('static/csv/alumnos.csv','r') as csvfiles:
+                        reader =csv.DictReader(csvfiles)
+                        result = []
+                        validator = 0
+                        for row in reader:
+                            if  str(row['matricula']) == data['matricula']:
+                                validator = 1
+                                result.append(row)
+                        if validator == 0:
+                            result.append("No existe el valor")
+                    return json.dumps(result)
                 elif data["action"] == "put":
                     v1 = data["matricula"]
                     v2 = data["nombre"]
