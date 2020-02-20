@@ -12,10 +12,11 @@ class Action:
                     with open ('static/csv/alumnos.csv','r') as csvfiles:
                         reader =csv.DictReader(csvfiles)
                         na = []
+                        caja = []
                         text = {}
                         text ['status'] = "200 ok"
                         text ['app_version'] = "0.0.1"
-                        na.append(text)
+                        caja.append(text)
                         result={}
                         for row in reader:
                             na.append(result)
@@ -24,7 +25,8 @@ class Action:
                             result ['primer_apellido'] = str(row['primer_apellido'])
                             result ['segundo_apellido'] = str(row['segundo_apellido'])
                             result ['carrera'] = str(row['carrera'])
-                    return json.dumps(na)
+                            text ['Alumno'] = na
+                    return json.dumps(caja)
                 elif data["action"] == "put":
                     data["matricula"]
                     data["nombre"]
