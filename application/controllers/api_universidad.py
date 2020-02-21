@@ -15,7 +15,7 @@ class Action:
                         caja = []
                         text = {}
                         text ['status'] = "200 ok"
-                        text ['app_version'] = "0.0.1"
+                        text ['app_version'] = "0.3.0"
                         # text ['Alumno'] = na
                         caja.append(text)
                         for row in reader:
@@ -50,6 +50,18 @@ class Action:
                         writer = csv.writer(csvfiles)
                         writer.writerow(result)
                     return("Hecho")
+                elif data['action'] == "update":
+                    with open ('static/csv/alumnos.csv','r') as csvfiles:
+                        reader =csv.DictReader(csvfiles)
+                        result = []
+                        validator = 0
+                        for row in reader:
+                            if  str(row['matricula']) == data['matricula']:
+                                validator = 1
+                                result.append(row)
+                        if validator == 0:
+                            result.append("No existe el valor")
+                    return json.dumps(result)
                 else:
                     result={}
                     text= "Comand not found"
